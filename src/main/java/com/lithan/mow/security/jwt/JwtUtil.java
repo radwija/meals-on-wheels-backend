@@ -1,4 +1,4 @@
-package com.kyn.security.config;
+package com.lithan.mow.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
