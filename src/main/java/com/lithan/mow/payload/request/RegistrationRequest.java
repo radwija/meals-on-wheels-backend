@@ -1,5 +1,7 @@
 package com.lithan.mow.payload.request;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class RegistrationRequest {
     private String name;
     private String email;
@@ -7,6 +9,11 @@ public class RegistrationRequest {
     private String gender;
     private String role;
     private String password;
+
+    private MultipartFile qualification;
+
+    private MultipartFile photo;
+
 
     public String getName() {
         return name;
@@ -54,5 +61,21 @@ public class RegistrationRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public MultipartFile getQualification() {
+        return qualification;
+    }
+
+    public void setQualification(MultipartFile qualification) {
+        this.qualification = qualification;
+    }
+
+    public MultipartFile getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(MultipartFile photo) {
+        this.photo = photo;
     }
 }

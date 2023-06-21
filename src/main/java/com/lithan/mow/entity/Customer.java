@@ -44,6 +44,8 @@ public class Customer {
 
     private boolean active;
 
+    private double distance;
+
     public Long getId() {
         return id;
     }
@@ -139,5 +141,13 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 }
