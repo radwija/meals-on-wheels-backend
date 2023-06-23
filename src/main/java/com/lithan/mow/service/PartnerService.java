@@ -35,4 +35,8 @@ public class PartnerService {
         return partnerRepository.findActiveByEmail(email);
     }
 
+    public Optional<Partner> getPartnerByEmail(String email){
+        return partnerRepository.findByEmail(email);
+    }
+
 }

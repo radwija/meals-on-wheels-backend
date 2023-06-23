@@ -1,6 +1,7 @@
 package com.lithan.mow.service;
 
 import com.lithan.mow.entity.Customer;
+import com.lithan.mow.entity.Partner;
 import com.lithan.mow.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -36,5 +37,8 @@ public class CustomerService {
         return customerRepository.findActiveByEmail(email);
     }
 
+    public Optional<Customer> getCustomerByEmail(String email){
+        return customerRepository.findByEmail(email);
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.lithan.mow.security.jwt;
 
 import com.lithan.mow.security.UserDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,13 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+    @Autowired
     private UserDetailsServiceImpl userDetailsService;
+    @Autowired
     private JwtUtil jwtTokenHelper;
 
-    public JwtAuthenticationFilter(UserDetailsServiceImpl userDetailsService, JwtUtil jwtTokenHelper) {
-        this.userDetailsService = userDetailsService;
-        this.jwtTokenHelper = jwtTokenHelper;
-    }
 
     public JwtAuthenticationFilter() {
 
