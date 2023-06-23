@@ -21,8 +21,13 @@ public class Partner {
     @Enumerated(EnumType.STRING)
     private EStatus status;
 
-    @Column(name = "image_url")
-    private String imageUrl;
+    @Lob
+    @Column(name = "profile_picture")
+    private byte[] profilePicture;
+
+    @Lob
+    @Column(name = "profile_background")
+    private byte[] profileBackground;
 
     private boolean active;
 
@@ -74,19 +79,27 @@ public class Partner {
         this.status = status;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     public boolean isActive() {
         return active;
     }
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public byte[] getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public byte[] getProfileBackground() {
+        return profileBackground;
+    }
+
+    public void setProfileBackground(byte[] profileBackground) {
+        this.profileBackground = profileBackground;
     }
 }
