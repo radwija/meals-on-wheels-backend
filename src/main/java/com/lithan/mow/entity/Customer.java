@@ -44,6 +44,10 @@ public class Customer {
 
     private boolean active;
 
+    private double distance;
+
+    private String birthDate;
+
     public Long getId() {
         return id;
     }
@@ -139,5 +143,21 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 }
