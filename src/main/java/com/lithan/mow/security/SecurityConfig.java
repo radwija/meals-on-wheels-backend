@@ -63,7 +63,7 @@ public class SecurityConfig {
 				.and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
-				.authorizeRequests().antMatchers("/api/auth/**").permitAll()
+				.authorizeRequests().antMatchers("/api/auth/**","/api/partner/apply").permitAll()
 				.antMatchers("/api/order/**").permitAll()
 				.antMatchers("/api/test/**").permitAll()
 				.antMatchers("/api/file/**").permitAll()
