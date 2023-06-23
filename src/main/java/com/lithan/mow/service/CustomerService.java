@@ -32,6 +32,9 @@ public class CustomerService {
         }
         return false; // Customer does not exist
     }
+    public Boolean isActive(String email){
+        return customerRepository.findActiveByEmail(email);
+    }
 
 
 }

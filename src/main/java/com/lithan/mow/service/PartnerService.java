@@ -31,4 +31,8 @@ public class PartnerService {
         return false; // Customer does not exist
     }
 
+    public Boolean isActive(String email){
+        return partnerRepository.findActiveByEmail(email);
+    }
+
 }
