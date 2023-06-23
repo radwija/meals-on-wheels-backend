@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/partner/")
-@CrossOrigin(origins = "*", maxAge = 3600)
+
 public class PartnershipController {
 
     @Autowired
