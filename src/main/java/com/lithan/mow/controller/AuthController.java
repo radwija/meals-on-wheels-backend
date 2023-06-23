@@ -3,19 +3,24 @@ package com.lithan.mow.controller;
 import com.lithan.mow.constraint.EGender;
 import com.lithan.mow.constraint.ERole;
 import com.lithan.mow.entity.Customer;
+import com.lithan.mow.entity.Partner;
+import com.lithan.mow.exception.UserNotActiveException;
 import com.lithan.mow.payload.request.LoginRequest;
 import com.lithan.mow.payload.response.AuthResponse;
 import com.lithan.mow.security.jwt.JwtUtil;
 import com.lithan.mow.service.CustomerService;
+import com.lithan.mow.service.PartnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,6 +35,9 @@ public class AuthController {
 
     @Autowired
     CustomerService customerService;
+
+    @Autowired
+    PartnerService partnerService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -84,21 +92,43 @@ public class AuthController {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
             UserDetails user = (UserDetails) authentication.getPrincipal();
+            Set<String> roles = user.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .collect(Collectors.toSet());
+            boolean isActive;
+            if (roles.contains("ROLE_PARTNER")) {
+                isActive = partnerService.isActive(user.getUsername());
+            } else {
+              isActive = customerService.isActive(user.getUsername());
+            }
+            if (!isActive){
+                System.out.println("Your account is not active yet");
+                return ResponseEntity.status(401)
+                        .body("Your account is not active yet, please wait for admin to review and activate your account");
+            }
             String jwtToken = jwtUtil.generateToken(user.getUsername());
             AuthResponse res = new AuthResponse();
             res.setEmail(user.getUsername());
             res.setAccessToken(jwtToken);
-            Set<String> roles = user.getAuthorities().stream()
-                    .map(GrantedAuthority::getAuthority)
-                    .collect(Collectors.toSet());
+
             res.setRole(roles);
 
             return ResponseEntity.ok(res);
-        } catch (AuthenticationException e) {
+        } catch (UserNotActiveException e) {
             // Authentication failed
             System.out.println(e);
             return ResponseEntity.status(401)
-                    .body("Authentication failed. Invalid username or password.");
+                    .body("Your account is not active yet, please wait for admin to review and activate your account");
+        }
+        catch (BadCredentialsException e){
+        System.out.println(e);
+        return ResponseEntity.status(401)
+                .body("Authentication failed. Invalid username or password.");
+        }
+        catch (Exception e){
+            System.out.println(e);
+            return ResponseEntity.status(500)
+                    .body("Internal server error");
         }
     }
 
