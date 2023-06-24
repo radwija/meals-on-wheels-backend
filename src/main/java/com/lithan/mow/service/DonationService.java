@@ -16,7 +16,7 @@ public class DonationService {
 
         donation.setPayerName(donationRequest.getPayerName());
         donation.setEmail(donationRequest.getEmail());
-        donation.setSource(donationRequest.getSource());
+        donation.setPaymentSource(donationRequest.getPaymentSource());
         donation.setAmount(donationRequest.getAmount());
         donation.setTransactionDate(donationRequest.getTransactionDate());
 

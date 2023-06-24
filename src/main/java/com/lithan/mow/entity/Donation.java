@@ -19,7 +19,7 @@ public class Donation {
     @Email
     private String email;
 
-    private String source;
+    private String paymentSource;
 
     private BigDecimal amount;
 
@@ -49,12 +49,12 @@ public class Donation {
         this.email = email;
     }
 
-    public String getSource() {
-        return source;
+    public String getPaymentSource() {
+        return paymentSource;
     }
 
-    public void setSource(String source) {
-        this.source = source;
+    public void setPaymentSource(String paymentSource) {
+        this.paymentSource = paymentSource;
     }
 
     public BigDecimal getAmount() {

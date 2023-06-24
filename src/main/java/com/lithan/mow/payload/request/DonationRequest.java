@@ -1,8 +1,5 @@
 package com.lithan.mow.payload.request;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -14,7 +11,7 @@ public class DonationRequest {
     @Email
     private String email;
 
-    private String source;
+    private String paymentSource;
 
     private BigDecimal amount;
 
@@ -36,12 +33,12 @@ public class DonationRequest {
         this.email = email;
     }
 
-    public String getSource() {
-        return source;
+    public String getPaymentSource() {
+        return paymentSource;
     }
 
-    public void setSource(String source) {
-        this.source = source;
+    public void setPaymentSource(String paymentSource) {
+        this.paymentSource = paymentSource;
     }
 
     public BigDecimal getAmount() {
