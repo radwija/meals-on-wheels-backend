@@ -5,18 +5,21 @@ import com.lithan.mow.payload.request.DonationRequest;
 import com.lithan.mow.service.DonationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/donation")
+@CrossOrigin(origins = "http://localhost:3000")
 public class DonationController {
     @Autowired
     private DonationService donationService;
 
-    @PostMapping("/save-donation")
+    @GetMapping
+    public void isActive() {
+
+    }
+
+    @PostMapping
     public ResponseEntity<?> saveDonation(@RequestBody DonationRequest donationRequest) {
        Donation savedDonation = donationService.saveDonation(donationRequest);
        return ResponseEntity.ok(savedDonation);
