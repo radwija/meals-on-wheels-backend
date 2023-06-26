@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/me")
@@ -81,6 +84,62 @@ public class ProfileController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
         }
     }
+
+    @PostMapping("update-picture")
+    public ResponseEntity<?> updatePicture(@RequestParam("picture") MultipartFile picture, @RequestParam("role") String role, @RequestParam("email") String email) {
+        try {
+            // Check file size
+            if (picture.getSize() > 304857) {
+                return ResponseEntity.badRequest().body("File size exceeds the allowed limit. File must be under 300 KB.");
+            }
+
+            byte[] convertedPicture = picture.getBytes();
+            if (role.equals("ROLE_PARTNER")) {
+                Partner partner = partnerService.getPartnerByEmail(email).get();
+                partner.setProfilePicture(convertedPicture);
+                partner = partnerService.updateProfile(partner);
+                return ResponseEntity.ok(partner);
+            } else {
+                Customer customer = customerService.getCustomerByEmail(email).get();
+                customer.setProfilePicture(convertedPicture);
+                customer = customerService.updateProfile(customer);
+                return ResponseEntity.ok(customer);
+            }
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while processing the file.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
+        }
+    } @PostMapping("update-background")
+    public ResponseEntity<?> updateBackground(@RequestParam("background") MultipartFile background, @RequestParam("role") String role, @RequestParam("email") String email) {
+        try {
+            // Check file size
+            if (background.getSize() > 304857) {
+                return ResponseEntity.badRequest().body("File size exceeds the allowed limit. File must be under 300 KB.");
+            }
+
+
+            byte[] convertedBackground = background.getBytes();
+            if (role.equals("ROLE_PARTNER")) {
+                Partner partner = partnerService.getPartnerByEmail(email).get();
+                partner.setProfileBackground(convertedBackground);
+                partner = partnerService.updateProfile(partner);
+                return ResponseEntity.ok(partner);
+            } else {
+                Customer customer = customerService.getCustomerByEmail(email).get();
+                customer.setProfileBackground(convertedBackground);
+                customer = customerService.updateProfile(customer);
+                return ResponseEntity.ok(customer);
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while processing the file.");
+        } catch (Exception e) {
+            System.out.println(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
+        }
+    }
+
 
 
 }
