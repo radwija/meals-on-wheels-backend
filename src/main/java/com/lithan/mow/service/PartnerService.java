@@ -39,4 +39,8 @@ public class PartnerService {
         return partnerRepository.findByEmail(email);
     }
 
+    public Partner updateProfile(Partner partner){
+        return partnerRepository.save(partner);
+    }
+
 }
