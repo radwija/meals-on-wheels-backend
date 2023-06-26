@@ -43,4 +43,5 @@ public class PartnerService {
         return partnerRepository.save(partner);
     }
 
+
 }
