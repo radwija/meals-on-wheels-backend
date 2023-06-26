@@ -64,11 +64,8 @@ public class SecurityConfig {
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
 				.authorizeRequests().antMatchers("/api/auth/**","/api/partner/apply").permitAll()
-				.antMatchers("/api/order/**").permitAll()
-				.antMatchers("/api/test/**").permitAll()
-				.antMatchers("/api/file/**").permitAll()
 				.antMatchers("/downloadFile/**").permitAll()
-				.antMatchers("/api/**").permitAll()
+				.antMatchers("/api/**").authenticated() // Require authentication for /api/ endpoints
 				.anyRequest().authenticated()
 				.and()
 				.httpBasic().disable()
