@@ -4,8 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import lombok.Data;
 
-
+@Data
 @Entity
 public class Feedback {
     @Id
@@ -19,7 +20,6 @@ public class Feedback {
     private int mealPackageId;
 
     private String feedback;
-
 
     public Long getId() {
         return id;

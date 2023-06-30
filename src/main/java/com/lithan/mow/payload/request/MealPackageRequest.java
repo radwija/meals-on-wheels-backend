@@ -21,6 +21,17 @@ public class MealPackageRequest {
 
     private boolean frozen;
 
+    public MealPackageRequest(MealPackage meal) {
+        this.id = meal.getId();
+        this.packageName = meal.getPackageName();
+        this.mainCourse = meal.getMainCourse();
+        this.salad = meal.getSalad();
+        this.soup = meal.getSoup();
+        this.dessert = meal.getDessert();
+        this.drink = meal.getDrink();
+        this.frozen =  meal.isFrozen();
+        this.packageImage = meal.getPackageImage();
+    }
     public Long getId() {
         return id;
     }

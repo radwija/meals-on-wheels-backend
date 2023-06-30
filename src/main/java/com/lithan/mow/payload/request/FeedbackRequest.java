@@ -3,8 +3,9 @@ package com.lithan.mow.payload.request;
 import javax.validation.constraints.Email;
 
 import com.lithan.mow.entity.Feedback;
+import lombok.Data;
 
-
+@Data
 public class FeedbackRequest {
 
     private long id;
@@ -69,4 +70,5 @@ public class FeedbackRequest {
     public void setFeedback(String feedback) {
         this.feedback = feedback;
     }
+
 }

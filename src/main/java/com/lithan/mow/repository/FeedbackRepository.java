@@ -7,3 +7,4 @@ import com.lithan.mow.entity.Feedback;
 public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
 
 }
+
