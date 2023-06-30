@@ -20,7 +20,7 @@ import com.lithan.mow.repository.OrderRepository;
 import com.lithan.mow.repository.PartnerRepository;
 import com.lithan.mow.service.CustomerService;
 
-@PreAuthorize("hasAnyRole('ROLE_PARTNER','ROLE_VOLUNTEER')")
+@PreAuthorize("hasAnyRole('ROLE_PARTNER','ROLE_VOLUNTTEER')")
 @RestController
 @RequestMapping("/api/partner")
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -29,13 +29,13 @@ public class PartnerController {
     @Autowired
     OrderRepository orderRepository;
 
-
     @Autowired
     CustomerService customerService;
 
     @Autowired
     PartnerRepository partnerRepository;
 
+    //Get Order
     @GetMapping("/order")
     public List<OrderResponse> getOrder() {
         List<OrderResponse> orderList = new ArrayList<>();
@@ -46,17 +46,16 @@ public class PartnerController {
         return orderList;
     }
 
-    //Get All order
+    //Get all Order
     @GetMapping("/order/all")
     public List<OrderResponse> getAllOrder() {
         List<OrderResponse> orderList = new ArrayList<>();
-        String email = "";
         orderRepository.findByPreparedBy(customerService.getCurrentPartner())
                 .forEach(order -> orderList.add(new OrderResponse(order)));
         return orderList;
     }
 
-    //Prepare Food
+    //Prepare Task
     @GetMapping("/order/{id}/prepare")
     public MessageResponse prepareOrder(@PathVariable Long id) {
         Order order = orderRepository.findById(id).get();
@@ -72,9 +71,9 @@ public class PartnerController {
         return new MessageResponse("preparing order_id: " + id);
     }
 
-    //Complete the Food
+    //Completed Task
     @GetMapping("order/{id}/complete")
-    public MessageResponse prepareOrderComplate(@PathVariable Long id) {
+    public MessageResponse prepareOrderComplete(@PathVariable Long id) {
         Order order = orderRepository.findById(id).get();
         Partner caregiver = customerService.getCurrentPartner();
 
