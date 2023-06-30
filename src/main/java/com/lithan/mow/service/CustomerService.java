@@ -1,7 +1,6 @@
 package com.lithan.mow.service;
 
 import com.lithan.mow.entity.Customer;
-import com.lithan.mow.entity.Partner;
 import com.lithan.mow.repository.CustomerRepository;
 import com.lithan.mow.repository.PartnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +45,7 @@ public class CustomerService {
     public Optional<Customer> getCustomerByEmail(String email){
         return customerRepository.findByEmail(email);
     }
-
+  
     public Partner getCurrentPartner() {
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         System.out.println("current user: " + currentUserEmail);
@@ -57,5 +56,8 @@ public class CustomerService {
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         System.out.println("current user: " + currentUserEmail);
         return customerRepository.findByEmail(currentUserEmail).orElseThrow(()-> new UsernameNotFoundException("current user not found"));
+    }
+    public Customer updateProfile(Customer customer){
+        return customerRepository.save(customer);
     }
 }
