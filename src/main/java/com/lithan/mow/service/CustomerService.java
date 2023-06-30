@@ -51,7 +51,11 @@ public class CustomerService {
         System.out.println("current user: " + currentUserEmail);
         return partnerRepository.findByEmail(currentUserEmail).orElseThrow(()-> new UsernameNotFoundException("current user not found"));
     }
-
+    public Partner getCurrentPartner() {
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println("current user: " + currentUserEmail);
+        return partnerRepository.findByEmail(currentUserEmail).orElseThrow(()-> new UsernameNotFoundException("current user not found"));
+    }
     public Customer getCurrentUser() {
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         System.out.println("current user: " + currentUserEmail);
@@ -61,3 +65,4 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 }
+
