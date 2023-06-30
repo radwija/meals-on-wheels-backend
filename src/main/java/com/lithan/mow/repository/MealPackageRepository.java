@@ -2,7 +2,7 @@ package com.lithan.mow.repository;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.lithan.mow.model.MealPackage;
+import com.lithan.mow.entity.MealPackage;
 
 public interface MealPackageRepository extends JpaRepository<MealPackage, Long>{
     List<MealPackage> findByFrozen(boolean frozen);
