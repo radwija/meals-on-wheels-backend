@@ -1,17 +1,8 @@
-package com.lithan.mow.model;
+package com.lithan.mow.entity;
 
 import javax.persistence.*;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import com.lithan.mow.payload.request.MealPackageRequest;
 
 @Entity
-@Table(name = "tb_meal_package")
 public class MealPackage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +27,7 @@ public class MealPackage {
     private boolean active;
 
     @Column(name = "package_image")
-    private String packageImage;
+    private byte[] packageImage;
 
     public Long getId() {
         return id;
@@ -110,11 +101,11 @@ public class MealPackage {
         this.active = active;
     }
 
-    public String getPackageImage() {
+    public byte[] getPackageImage() {
         return packageImage;
     }
 
-    public void setPackageImage(String packageImage) {
+    public void setPackageImage(byte[] packageImage) {
         this.packageImage = packageImage;
     }
 }

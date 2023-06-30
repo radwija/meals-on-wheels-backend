@@ -1,6 +1,6 @@
 package com.lithan.mow.payload.request;
 
-import com.lithan.mow.model.MealPackage;
+import com.lithan.mow.entity.MealPackage;
 
 public class MealPackageRequest {
     private Long id;
@@ -17,7 +17,7 @@ public class MealPackageRequest {
 
     private String drink;
 
-    private String packageImage;
+    private byte[] packageImage;
 
     private boolean frozen;
 
@@ -77,11 +77,11 @@ public class MealPackageRequest {
         this.drink = drink;
     }
 
-    public String getPackageImage() {
+    public byte[] getPackageImage() {
         return packageImage;
     }
 
-    public void setPackageImage(String packageImage) {
+    public void setPackageImage(byte[] packageImage) {
         this.packageImage = packageImage;
     }
 
