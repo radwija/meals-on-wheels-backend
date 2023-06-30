@@ -1,4 +1,4 @@
-package com.lithan.mow.model;
+package com.lithan.mow.entity;
 
 import javax.persistence.*;
 
