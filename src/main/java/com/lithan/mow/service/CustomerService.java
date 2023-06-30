@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -49,13 +48,10 @@ public class CustomerService {
         return customerRepository.findByEmail(email);
     }
 
-
     public Customer updateProfile(Customer customer){
         return customerRepository.save(customer);
     }
-
-
-
+  
     public Partner getCurrentPartner() {
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         System.out.println("current user: " + currentUserEmail);
@@ -69,3 +65,4 @@ public class CustomerService {
     }
 
 }
+
