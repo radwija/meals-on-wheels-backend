@@ -28,10 +28,8 @@ public class CustomerService {
     }
     public Boolean isCustomerExist(String email){
         Optional<Customer> customerOptional = customerRepository.findByEmail(email);
-        if (customerOptional.isPresent()){
-            return true; // Customer exists
-        }
-        return false; // Customer does not exist
+        return customerOptional.isPresent(); // Customer exists
+// Customer does not exist
     }
     public Boolean isActive(String email){
         return customerRepository.findActiveByEmail(email);
