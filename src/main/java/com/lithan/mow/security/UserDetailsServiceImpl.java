@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.List;
 
 
 @Service
@@ -34,7 +35,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             Partner data = partnerRepository.findByEmail(username).get();
 
             return new User(data.getEmail(), data.getPassword(),
-                    Arrays.asList(new SimpleGrantedAuthority(ERole.ROLE_PARTNER.toString())));
+                    List.of(new SimpleGrantedAuthority(ERole.ROLE_PARTNER.toString())));
         }
 
         Customer user = customerRepository.findByEmail(username)
@@ -42,6 +43,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 
         return new User(user.getEmail(), user.getPassword(),
-                Arrays.asList(new SimpleGrantedAuthority(user.getRole().toString())));
+                List.of(new SimpleGrantedAuthority(user.getRole().toString())));
     }
 }

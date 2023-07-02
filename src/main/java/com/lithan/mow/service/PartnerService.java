@@ -25,10 +25,8 @@ public class PartnerService {
     }
     public Boolean isPartnerExist(String email){
         Optional<Partner> customerOptional = partnerRepository.findByEmail(email);
-        if (customerOptional.isPresent()){
-            return true; // Customer exists
-        }
-        return false; // Customer does not exist
+        return customerOptional.isPresent(); // Customer exists
+// Customer does not exist
     }
 
     public Boolean isActive(String email){

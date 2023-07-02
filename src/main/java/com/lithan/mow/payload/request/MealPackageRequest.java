@@ -17,7 +17,9 @@ public class MealPackageRequest {
 
     private String drink;
 
-    private byte[] packageImage;
+
+    private String packageImage;
+
 
     private boolean frozen;
 
@@ -31,6 +33,10 @@ public class MealPackageRequest {
         this.drink = meal.getDrink();
         this.frozen =  meal.isFrozen();
         this.packageImage = meal.getPackageImage();
+    }
+
+
+    public MealPackageRequest() {
     }
     public Long getId() {
         return id;
@@ -88,11 +94,11 @@ public class MealPackageRequest {
         this.drink = drink;
     }
 
-    public byte[] getPackageImage() {
+    public String getPackageImage() {
         return packageImage;
     }
 
-    public void setPackageImage(byte[] packageImage) {
+    public void setPackageImage(String packageImage) {
         this.packageImage = packageImage;
     }
 
@@ -102,5 +108,12 @@ public class MealPackageRequest {
 
     public void setFrozen(boolean frozen) {
         this.frozen = frozen;
+    }
+
+    @Override
+    public String toString() {
+        return "MealPackageRequest [id=" + id + ", packageName=" + packageName + ", mainCourse=" + mainCourse
+                + ", salad=" + salad + ", soup=" + soup + ", dessert=" + dessert + ", drink=" + drink
+                + ", packageImage=" + packageImage + ", frozen=" + frozen + "]";
     }
 }

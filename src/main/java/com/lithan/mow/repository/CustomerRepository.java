@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 @Transactional
 public interface CustomerRepository extends JpaRepository<Customer,Long> {
-    public Optional<Customer> findByEmail(String email);
+    Optional<Customer> findByEmail(String email);
 
     @Query("SELECT c.active FROM Customer c WHERE c.email = :email")
     Boolean findActiveByEmail(@Param("email") String email);
