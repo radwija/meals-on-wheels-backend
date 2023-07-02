@@ -9,6 +9,8 @@ public class ProfileResponse {
     private byte[] picture;
     private byte[] background;
 
+    private double distance;
+
 
 
     public String getName() {
@@ -67,5 +69,11 @@ public class ProfileResponse {
         this.background = background;
     }
 
+    public double getDistance() {
+        return distance;
+    }
 
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
 }

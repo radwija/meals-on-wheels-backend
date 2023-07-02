@@ -1,5 +1,6 @@
 package com.lithan.mow.entity;
 
+import javax.persistence.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "meal_packages")
 public class MealPackage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +25,10 @@ public class MealPackage {
     private String dessert;
     private String drink;
 
-    @Column(name = "is_frozen")
+    @Column(name = "frozen")
     private boolean frozen;
 
-    @Column(name = "is_active")
+    @Column(name = "active")
     private boolean active;
 
     @Column(name = "package_image")
@@ -121,7 +121,6 @@ public class MealPackage {
     public void setActive(boolean active) {
         this.active = active;
     }
-
     public String getPackageImage() {
         return packageImage;
     }

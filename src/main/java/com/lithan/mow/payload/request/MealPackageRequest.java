@@ -17,7 +17,9 @@ public class MealPackageRequest {
 
     private String drink;
 
+
     private String packageImage;
+
 
     private boolean frozen;
 
@@ -33,9 +35,9 @@ public class MealPackageRequest {
         this.packageImage = meal.getPackageImage();
     }
 
+
     public MealPackageRequest() {
     }
-
     public Long getId() {
         return id;
     }
