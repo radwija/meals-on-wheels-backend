@@ -18,7 +18,6 @@ import java.util.List;
 @PreAuthorize("hasAnyRole('ROLE_DRIVER','ROLE_VOLUNTEER')")
 @RestController
 @RequestMapping("/api/driver")
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class DriverController {
 
     @Autowired

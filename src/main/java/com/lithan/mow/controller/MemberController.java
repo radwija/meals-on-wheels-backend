@@ -20,7 +20,6 @@ import java.util.List;
 @PreAuthorize("hasRole('ROLE_MEMBER')")
 @RestController
 @RequestMapping("/api/member")
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class MemberController {
 
    @Autowired

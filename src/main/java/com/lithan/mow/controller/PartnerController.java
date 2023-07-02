@@ -23,7 +23,6 @@ import com.lithan.mow.service.CustomerService;
 @PreAuthorize("hasAnyRole('ROLE_PARTNER','ROLE_VOLUNTEER')")
 @RestController
 @RequestMapping("/api/partner")
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class PartnerController {
 
     @Autowired
