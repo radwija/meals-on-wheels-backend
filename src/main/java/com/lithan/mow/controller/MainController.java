@@ -1,5 +1,6 @@
 package com.lithan.mow.controller;
 
+import com.lithan.mow.entity.Customer;
 import com.lithan.mow.entity.Feedback;
 import com.lithan.mow.entity.MealPackage;
 import com.lithan.mow.payload.request.FeedbackRequest;
@@ -21,7 +22,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class MainController {
 
 
@@ -31,6 +31,8 @@ public class MainController {
     @Autowired
     MealPackageRepository mealPackageRepository;
 
+    @Autowired
+    CustomerService customerService;
 
 
     @GetMapping("/mealcount")
@@ -56,15 +58,17 @@ public class MainController {
     }
 
     @GetMapping("/menu")
-    public List<MealPackageRequest> getAllMenu() {
+    public List<MealPackageRequest> getAllMenu(@RequestParam("email") String email) {
+        Customer customer = customerService.getCustomerByEmail(email).get();
+
         // get day name
         Format f = new SimpleDateFormat("EEEE");
         String today = f.format(new Date());
 
         List<MealPackageRequest> mealPackageList = new ArrayList<>();
 
-        // return frozen meal on weekend
-        if (today.equalsIgnoreCase("sunday") || today.equalsIgnoreCase("saturday")) {
+        // return frozen meal on weekend and more than 10 km
+        if (today.equalsIgnoreCase("sunday") || today.equalsIgnoreCase("saturday") || customer.getDistance() > 10) {
 
             mealPackageRepository.findByFrozenAndActive(true, true).forEach(data -> mealPackageList.add(new MealPackageRequest(data)));
 

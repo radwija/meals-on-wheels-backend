@@ -48,6 +48,7 @@ public class ProfileController {
             res.setPicture(customer.getProfilePicture());
             res.setBackground(customer.getProfileBackground());
             res.setBirthDate(customer.getBirthDate());
+            res.setDistance(customer.getDistance());
         }
         return ResponseEntity.ok(res);
     }
