@@ -1,6 +1,12 @@
 package com.lithan.mow.entity;
 
 import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 public class MealPackage {
@@ -11,23 +17,38 @@ public class MealPackage {
     @Column(name = "package_name")
     private String packageName;
 
-    @Column(name="main_course")
+    @Column(name = "main_course")
     private String mainCourse;
 
     private String salad;
-
     private String soup;
-
     private String dessert;
-
     private String drink;
 
+    @Column(name = "frozen")
     private boolean frozen;
 
+    @Column(name = "active")
     private boolean active;
 
     @Column(name = "package_image")
-    private byte[] packageImage;
+    private String packageImage;
+
+    public MealPackage() {
+    }
+
+    public MealPackage(String packageName, String mainCourse, String salad, String soup, String dessert,
+                       String drink, boolean frozen, boolean active, String packageImage) {
+        this.packageName = packageName;
+        this.mainCourse = mainCourse;
+        this.salad = salad;
+        this.soup = soup;
+        this.dessert = dessert;
+        this.drink = drink;
+        this.frozen = frozen;
+        this.active = active;
+        this.packageImage = packageImage;
+    }
 
     public Long getId() {
         return id;
@@ -100,12 +121,11 @@ public class MealPackage {
     public void setActive(boolean active) {
         this.active = active;
     }
-
-    public byte[] getPackageImage() {
+    public String getPackageImage() {
         return packageImage;
     }
 
-    public void setPackageImage(byte[] packageImage) {
+    public void setPackageImage(String packageImage) {
         this.packageImage = packageImage;
     }
 }
