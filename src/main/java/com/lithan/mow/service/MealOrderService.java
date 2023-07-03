@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lithan.mow.constraint.EStatus;
-import com.lithan.mow.payload.response.MealOrderResponse;
-import com.lithan.mow.repository.MealOrderRepository;
 
 @Service
 @Transactional
