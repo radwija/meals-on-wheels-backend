@@ -27,32 +27,66 @@ public class DonationServiceTest {
     DonationRepository donationRepository;
 
     @Test
-    public void saveDonationInfoTest() throws ParseException {
-//        DonationRequest donation = new DonationRequest();
-//        Date transactionDate = new Date("2023-06-24T13:30:31Z");
-//        donation.setPayerName("User Test");
-//        donation.setEmail("usertest@email.com");
-//        donation.setPaymentSource("paypal");
-//        donation.setAmount(BigDecimal.valueOf(10));
-//        donation.setTransactionDate(transactionDate);
-//
-//        Mockito.when(donationRepository.save(Mockito.any(Donation.class))).thenReturn(new Donation());
-//
-//        DonationResponse<?> donationResponse = donationService.saveDonation(donation);
-//        Assert.assertEquals("Donation information recorded successfully!", donationResponse.getMessage());
-
-        DonationRequest donation = new DonationRequest();
+    public void saveDonationInfoMinAmountTest() throws ParseException {
+        DonationRequest donationRequest = new DonationRequest();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         Date transactionDate = dateFormat.parse("2023-06-24T13:30:31Z");
-        donation.setPayerName("User Test");
-        donation.setEmail("user@test.com");
-        donation.setPaymentSource("paypal");
-        donation.setAmount(BigDecimal.valueOf(0.01));
-        donation.setTransactionDate(transactionDate);
 
-//        Mockito.when(donationRepository.save(Mockito.any(Donation.class))).thenReturn(new Donation());
+        donationRequest.setPayerName("User Unit Test");
+        donationRequest.setEmail("user@unittest.com");
+        donationRequest.setPaymentSource("paypal");
+        donationRequest.setAmount(BigDecimal.valueOf(0.01));
+        donationRequest.setTransactionDate(transactionDate);
 
-        DonationResponse<?> donationResponse = donationService.saveDonation(donation);
+        DonationResponse<?> donationResponse = donationService.saveDonation(donationRequest);
         Assert.assertEquals("Donation information successfully recorded!", donationResponse.getMessage());
+    }
+
+    @Test
+    public void saveDonationInfoMaxAmountTest() throws ParseException {
+        DonationRequest donationRequest = new DonationRequest();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        Date transactionDate = dateFormat.parse("2023-06-24T13:30:31Z");
+
+        donationRequest.setPayerName("User Unit Test");
+        donationRequest.setEmail("user@unittest.com");
+        donationRequest.setPaymentSource("paypal");
+        donationRequest.setAmount(BigDecimal.valueOf(9999999.99));
+        donationRequest.setTransactionDate(transactionDate);
+
+        DonationResponse<?> donationResponse = donationService.saveDonation(donationRequest);
+        Assert.assertEquals("Donation information successfully recorded!", donationResponse.getMessage());
+    }
+
+    @Test
+    public void saveDonationInfoZeroAmountTest() throws ParseException {
+        DonationRequest donationRequest = new DonationRequest();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        Date transactionDate = dateFormat.parse("2023-06-24T13:30:31Z");
+
+        donationRequest.setPayerName("User Unit Test");
+        donationRequest.setEmail("user@unittest.com");
+        donationRequest.setPaymentSource("paypal");
+        donationRequest.setAmount(BigDecimal.valueOf(0));
+        donationRequest.setTransactionDate(transactionDate);
+
+        DonationResponse<?> donationResponse = donationService.saveDonation(donationRequest);
+        Assert.assertEquals("Amount of money is under minimum of amount ($ 0.01)", donationResponse.getMessage());
+    }
+
+    @Test
+    public void saveDonationInfoOverMaxAmountTest() throws ParseException {
+        DonationRequest donationRequest = new DonationRequest();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        Date transactionDate = dateFormat.parse("2023-06-24T13:30:31Z");
+
+        donationRequest.setPayerName("User Unit Test");
+        donationRequest.setEmail("user@unittest.com");
+        donationRequest.setPaymentSource("paypal");
+        donationRequest.setAmount(BigDecimal.valueOf(10000000));
+        donationRequest.setTransactionDate(transactionDate);
+
+        DonationResponse<?> donationResponse = donationService.saveDonation(donationRequest);
+        Assert.assertEquals("Amount of money is over maximum of amount ($ 9,999,999.99)", donationResponse.getMessage());
     }
 }
