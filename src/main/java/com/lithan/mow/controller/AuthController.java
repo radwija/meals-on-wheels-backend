@@ -53,6 +53,12 @@ public class AuthController {
         if(customerService.isCustomerExist(email)){
             return ResponseEntity.badRequest().body("Email already exists, please use different email");
         }
+        if (file.getSize() > 304857 || image.getSize() > 304857) {
+            return ResponseEntity.badRequest().body("File size exceeds the allowed limit. File must be under 300 KB.");
+        }
+
+
+
         byte[] qualification;
         byte[] photo;
         Customer customer = new Customer();
