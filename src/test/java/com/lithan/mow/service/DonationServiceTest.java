@@ -47,10 +47,10 @@ public class DonationServiceTest {
         donation.setPayerName("User Test");
         donation.setEmail("user@test.com");
         donation.setPaymentSource("paypal");
-        donation.setAmount(BigDecimal.valueOf(1000000));
+        donation.setAmount(BigDecimal.valueOf(0.01));
         donation.setTransactionDate(transactionDate);
 
-        Mockito.when(donationRepository.save(Mockito.any(Donation.class))).thenReturn(new Donation());
+//        Mockito.when(donationRepository.save(Mockito.any(Donation.class))).thenReturn(new Donation());
 
         DonationResponse<?> donationResponse = donationService.saveDonation(donation);
         Assert.assertEquals("Donation information successfully recorded!", donationResponse.getMessage());
