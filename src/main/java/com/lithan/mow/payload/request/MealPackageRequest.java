@@ -17,9 +17,7 @@ public class MealPackageRequest {
 
     private String drink;
 
-
     private String packageImage;
-
 
     private boolean frozen;
 
@@ -34,7 +32,6 @@ public class MealPackageRequest {
         this.frozen =  meal.isFrozen();
         this.packageImage = meal.getPackageImage();
     }
-
 
     public MealPackageRequest() {
     }
