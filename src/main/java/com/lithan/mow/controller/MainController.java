@@ -2,12 +2,9 @@ package com.lithan.mow.controller;
 
 import com.lithan.mow.entity.Customer;
 import com.lithan.mow.entity.Feedback;
-import com.lithan.mow.entity.MealPackage;
 import com.lithan.mow.payload.request.FeedbackRequest;
-import com.lithan.mow.payload.request.MealPackageRequest;
 import com.lithan.mow.payload.response.MessageResponse;
 import com.lithan.mow.repository.FeedbackRepository;
-import com.lithan.mow.repository.MealPackageRepository;
 import com.lithan.mow.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
