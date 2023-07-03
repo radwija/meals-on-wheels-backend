@@ -2,9 +2,11 @@ package com.lithan.mow.controller;
 
 import com.lithan.mow.entity.Customer;
 import com.lithan.mow.entity.Feedback;
+import com.lithan.mow.entity.MealPackage;
 import com.lithan.mow.payload.request.FeedbackRequest;
 import com.lithan.mow.payload.response.MessageResponse;
 import com.lithan.mow.repository.FeedbackRepository;
+import com.lithan.mow.repository.MealPackageRepository;
 import com.lithan.mow.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -68,15 +70,17 @@ public class MainController {
             // return frozen meal on weekends and for distances greater than 10 km
             if (today.equalsIgnoreCase("sunday") || today.equalsIgnoreCase("saturday") || customer.getDistance() > 10) {
                 mealPackageRepository.findByFrozenAndActive(true, true).forEach(data -> mealPackageList.add(new MealPackageRequest(data)));
-            } else {
-                mealPackageRepository.findByFrozenAndActive(false, true).forEach(data -> mealPackageList.add(new MealPackageRequest(data)));
+                return mealPackageList;
             }
-
+            mealPackageRepository.findByFrozenAndActive(false, true).forEach(data -> mealPackageList.add(new MealPackageRequest(data)));
             return mealPackageList;
-        } else {
-            // handle the case when the Customer is not found
-            return Collections.emptyList(); // or any other appropriate handling
         }
+
+        // Handle the case when the optionalCustomer is not present
+        // You can throw an exception or return an appropriate response
+        throw new IllegalArgumentException("Invalid email provided");
+        // or
+        // return ResponseEntity.badRequest().body("Invalid email provided");
     }
 
 
