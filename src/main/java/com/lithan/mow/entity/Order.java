@@ -37,9 +37,9 @@ public class Order{
     @Column(name = "ordered_on")
     private Date orderedOn;
 
-    public void setPartner(Partner partner) {
-    }
-
-    public void setDriver(Partner driver) {
-    }
+//    public void setPartner(Partner partner) {
+//    }
+//
+//    public void setDriver(Partner driver) {
+//    }
 }

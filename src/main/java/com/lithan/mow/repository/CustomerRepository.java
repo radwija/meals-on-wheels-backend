@@ -9,22 +9,28 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
 @Transactional
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
-    Optional<Customer> findByEmail(String email);
 
     @Query("SELECT c.active FROM Customer c WHERE c.email = :email")
     Boolean findActiveByEmail(@Param("email") String email);
 
-    int countAllBy();
+    Optional<Customer> findByEmail(String email);
 
-    List<Customer> findAllByRoleNotOrderByCreatedAtDesc(ERole role);
+    Boolean existsByEmail(String email);
 
-    List<Customer> findAllByRole(ERole role);
+    List<Customer> findByRole(ERole roles);
 
-    List<Customer> findAllByRoleAndActive(ERole role, boolean active);
+    List<Customer> findByRoleAndActive(ERole roles, boolean active);
+
+    List<Customer> findByRoleIsNot(ERole roles);
+
+    List<Customer> findByActive(boolean active);
+
+
 }
