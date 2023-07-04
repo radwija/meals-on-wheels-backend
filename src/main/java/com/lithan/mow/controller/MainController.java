@@ -56,7 +56,7 @@ public class MainController {
     }
 
     @GetMapping("/menu")
-    public List<MealPackageRequest> getAllMenu(@RequestParam("email") String email) {
+    public List<MealPackageRequest> getMenu(@RequestParam("email") String email) {
         Optional<Customer> optionalCustomer = customerService.getCustomerByEmail(email);
 
         if (optionalCustomer.isPresent()) {
@@ -84,7 +84,10 @@ public class MainController {
         // return ResponseEntity.badRequest().body("Invalid email provided");
     }
 
-
+    @GetMapping("/all-menu")
+    public List <MealPackage> getAllMenu(){
+        return mealPackageRepository.findAll();
+    }
 
     @GetMapping("menu/{id}")
     public MealPackageRequest getMenu(@PathVariable Long id) {

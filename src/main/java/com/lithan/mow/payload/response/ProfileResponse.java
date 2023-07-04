@@ -6,6 +6,7 @@ public class ProfileResponse {
     private String birthDate;
     private String email;
     private String gender;
+    private String status;
     private byte[] picture;
     private byte[] background;
 
@@ -43,6 +44,14 @@ public class ProfileResponse {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getGender() {

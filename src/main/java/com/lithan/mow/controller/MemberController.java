@@ -47,6 +47,7 @@ public class MemberController {
       List<OrderResponse> orderList = new ArrayList<>();
       orderRepository.findByStatusAndOrderedBy(EStatus.DELIVERY_COMPLETE, customersService.getCurrentUser())
             .forEach(order -> orderList.add(new OrderResponse(order)));
+      System.out.println(orderList);
       return orderList;
    }
 
