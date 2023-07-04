@@ -29,8 +29,8 @@ public class OrderService {
 
     @Autowired
     PartnerRepository partnerRepository;
-    public List<Order> getOrderWithStatus(EStatus status) {
-        List<OrderResponse>orderList = new ArrayList<>();
+    public List<OrderResponse> getOrderWithStatus(EStatus status) {
+        List<OrderResponse> orderList = new ArrayList<>();
         orderRepository.findByStatus(status).forEach(data -> orderList.add(new OrderResponse(data)));
         return orderList;
     }
