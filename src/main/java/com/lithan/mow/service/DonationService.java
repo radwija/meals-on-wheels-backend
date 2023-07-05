@@ -19,12 +19,12 @@ public class DonationService {
     public DonationResponse<?> saveDonation(DonationRequest donationRequest) {
         DonationResponse<Donation> response = new DonationResponse<>();
 
-        BigDecimal minAmount = new BigDecimal("0.01");
+        BigDecimal minAmount = new BigDecimal("5");
         BigDecimal maxAmount = new BigDecimal("9999999.99");
 
         if (donationRequest.getAmount().compareTo(minAmount) < 0) {
             response.setCode(400);
-            response.setMessage("Amount of money is under minimum of amount ($ 0.01)");
+            response.setMessage("Amount of money is under minimum of amount ($ 5)");
             return response;
         }
         else if (donationRequest.getAmount().compareTo(maxAmount) > 0) {

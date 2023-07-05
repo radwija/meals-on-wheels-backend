@@ -35,7 +35,7 @@ public class DonationServiceTest {
         donationRequest.setPayerName("User Unit Test");
         donationRequest.setEmail("user@unittest.com");
         donationRequest.setPaymentSource("paypal");
-        donationRequest.setAmount(BigDecimal.valueOf(0.01));
+        donationRequest.setAmount(BigDecimal.valueOf(5));
         donationRequest.setTransactionDate(transactionDate);
 
         DonationResponse<?> donationResponse = donationService.saveDonation(donationRequest);
@@ -71,7 +71,7 @@ public class DonationServiceTest {
         donationRequest.setTransactionDate(transactionDate);
 
         DonationResponse<?> donationResponse = donationService.saveDonation(donationRequest);
-        Assert.assertEquals("Amount of money is under minimum of amount ($ 0.01)", donationResponse.getMessage());
+        Assert.assertEquals("Amount of money is under minimum of amount ($ 5)", donationResponse.getMessage());
     }
 
     @Test
