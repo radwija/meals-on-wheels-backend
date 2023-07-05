@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -58,27 +56,38 @@ public class MainController {
     }
 
     @GetMapping("/menu")
-    public List<MealPackageRequest> getAllMenu(@RequestParam("email") String email) {
-        Customer customer = customerService.getCustomerByEmail(email).get();
+    public List<MealPackageRequest> getMenu(@RequestParam("email") String email) {
+        Optional<Customer> optionalCustomer = customerService.getCustomerByEmail(email);
 
-        // get day name
-        Format f = new SimpleDateFormat("EEEE");
-        String today = f.format(new Date());
+        if (optionalCustomer.isPresent()) {
+            Customer customer = optionalCustomer.get();
 
-        List<MealPackageRequest> mealPackageList = new ArrayList<>();
+            // get day name
+            Format f = new SimpleDateFormat("EEEE");
+            String today = f.format(new Date());
 
-        // return frozen meal on weekend and more than 10 km
-        if (today.equalsIgnoreCase("sunday") || today.equalsIgnoreCase("saturday") || customer.getDistance() > 10) {
+            List<MealPackageRequest> mealPackageList = new ArrayList<>();
 
-            mealPackageRepository.findByFrozenAndActive(true, true).forEach(data -> mealPackageList.add(new MealPackageRequest(data)));
-
+            // return frozen meal on weekends and for distances greater than 10 km
+            if (today.equalsIgnoreCase("sunday") || today.equalsIgnoreCase("saturday") || customer.getDistance() > 10) {
+                mealPackageRepository.findByFrozenAndActive(true, true).forEach(data -> mealPackageList.add(new MealPackageRequest(data)));
+                return mealPackageList;
+            }
+            mealPackageRepository.findByFrozenAndActive(false, true).forEach(data -> mealPackageList.add(new MealPackageRequest(data)));
             return mealPackageList;
         }
-        mealPackageRepository.findByFrozenAndActive(false,true).forEach(data -> mealPackageList.add(new MealPackageRequest(data)));
 
-        return mealPackageList;
+        // Handle the case when the optionalCustomer is not present
+        // You can throw an exception or return an appropriate response
+        throw new IllegalArgumentException("Invalid email provided");
+        // or
+        // return ResponseEntity.badRequest().body("Invalid email provided");
     }
 
+    @GetMapping("/all-menu")
+    public List <MealPackage> getAllMenu(){
+        return mealPackageRepository.findAll();
+    }
 
     @GetMapping("menu/{id}")
     public MealPackageRequest getMenu(@PathVariable Long id) {

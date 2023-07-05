@@ -4,13 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
-
-import com.lithan.mow.entity.Customer;
-import com.lithan.mow.entity.Order;
-import com.lithan.mow.entity.Partner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.lithan.mow.constraint.EStatus;
 import com.lithan.mow.payload.response.OrderResponse;
 import com.lithan.mow.repository.OrderRepository;
