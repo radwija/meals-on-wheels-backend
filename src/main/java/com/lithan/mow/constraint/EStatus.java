@@ -3,6 +3,7 @@ package com.lithan.mow.constraint;
 public enum EStatus {
     NOT_AVAILABLE,
     AVAILABLE,
+    ACTIVE,
     BUSY,
     PENDING,
     PREPARING,
