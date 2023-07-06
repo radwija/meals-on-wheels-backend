@@ -1,6 +1,6 @@
 package com.lithan.mow.payload.request;
 
-import com.lithan.mow.model.MealPackage;
+import com.lithan.mow.entity.MealPackage;
 
 public class MealPackageRequest {
     private Long id;
@@ -21,6 +21,20 @@ public class MealPackageRequest {
 
     private boolean frozen;
 
+    public MealPackageRequest(MealPackage meal) {
+        this.id = meal.getId();
+        this.packageName = meal.getPackageName();
+        this.mainCourse = meal.getMainCourse();
+        this.salad = meal.getSalad();
+        this.soup = meal.getSoup();
+        this.dessert = meal.getDessert();
+        this.drink = meal.getDrink();
+        this.frozen =  meal.isFrozen();
+        this.packageImage = meal.getPackageImage();
+    }
+
+    public MealPackageRequest() {
+    }
     public Long getId() {
         return id;
     }
@@ -91,5 +105,12 @@ public class MealPackageRequest {
 
     public void setFrozen(boolean frozen) {
         this.frozen = frozen;
+    }
+
+    @Override
+    public String toString() {
+        return "MealPackageRequest [id=" + id + ", packageName=" + packageName + ", mainCourse=" + mainCourse
+                + ", salad=" + salad + ", soup=" + soup + ", dessert=" + dessert + ", drink=" + drink
+                + ", packageImage=" + packageImage + ", frozen=" + frozen + "]";
     }
 }

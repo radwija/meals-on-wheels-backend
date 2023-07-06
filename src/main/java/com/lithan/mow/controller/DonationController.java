@@ -2,6 +2,7 @@ package com.lithan.mow.controller;
 
 import com.lithan.mow.entity.Donation;
 import com.lithan.mow.payload.request.DonationRequest;
+import com.lithan.mow.payload.response.DonationResponse;
 import com.lithan.mow.service.DonationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +22,10 @@ public class DonationController {
 
     @PostMapping
     public ResponseEntity<?> saveDonation(@RequestBody DonationRequest donationRequest) {
-       Donation savedDonation = donationService.saveDonation(donationRequest);
-       if (savedDonation != null ) {
-           return ResponseEntity.ok(savedDonation);
+       DonationResponse<?> result = donationService.saveDonation(donationRequest);
+       if (result.getResult() != null) {
+           return ResponseEntity.ok(result);
        }
-       return ResponseEntity.badRequest().body("Amount is out of maximum!");
+       return ResponseEntity.badRequest().body(result);
     }
 }

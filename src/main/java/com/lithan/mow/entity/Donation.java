@@ -22,7 +22,6 @@ public class Donation {
 
     private String paymentSource;
 
-    @Max(9999999)
     private BigDecimal amount;
 
     private Date transactionDate;

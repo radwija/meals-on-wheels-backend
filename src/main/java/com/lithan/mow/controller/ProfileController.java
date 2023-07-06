@@ -48,6 +48,10 @@ public class ProfileController {
             res.setPicture(customer.getProfilePicture());
             res.setBackground(customer.getProfileBackground());
             res.setBirthDate(customer.getBirthDate());
+
+            if(customer.getStatus() != null){
+            res.setStatus(customer.getStatus().toString());
+            }
         }
         return ResponseEntity.ok(res);
     }

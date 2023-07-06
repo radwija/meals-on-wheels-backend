@@ -6,8 +6,11 @@ public class ProfileResponse {
     private String birthDate;
     private String email;
     private String gender;
+    private String status;
     private byte[] picture;
     private byte[] background;
+
+    private double distance;
 
 
 
@@ -43,6 +46,14 @@ public class ProfileResponse {
         this.email = email;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getGender() {
         return gender;
     }
@@ -67,5 +78,11 @@ public class ProfileResponse {
         this.background = background;
     }
 
+    public double getDistance() {
+        return distance;
+    }
 
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
 }
