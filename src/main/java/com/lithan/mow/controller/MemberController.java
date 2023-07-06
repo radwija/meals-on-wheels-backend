@@ -42,14 +42,24 @@ public class MemberController {
       return orderList;
    }
 
+//   @GetMapping("/order/all")
+//   public List<OrderResponse> getAllOrder() {
+//      List<OrderResponse> orderList = new ArrayList<>();
+//      orderRepository.findByStatusAndOrderedBy(EStatus.DELIVERY_COMPLETE, customersService.getCurrentUser())
+//            .forEach(order -> orderList.add(new OrderResponse(order)));
+//      System.out.println(orderList);
+//      return orderList;
+//   }
+
    @GetMapping("/order/all")
    public List<OrderResponse> getAllOrder() {
       List<OrderResponse> orderList = new ArrayList<>();
-      orderRepository.findByStatusAndOrderedBy(EStatus.DELIVERY_COMPLETE, customersService.getCurrentUser())
-            .forEach(order -> orderList.add(new OrderResponse(order)));
-      System.out.println(orderList);
+      orderRepository.findByOrderedBy(customersService.getCurrentUser())
+              .forEach(order -> orderList.add(new OrderResponse(order)));
+//      System.out.println(orderList);
       return orderList;
    }
+
 
    @GetMapping("/order/{id}/create")
    public MessageResponse orderMeal(@PathVariable Long id) {
